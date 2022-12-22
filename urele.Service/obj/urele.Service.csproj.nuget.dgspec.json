@@ -11,7 +11,7 @@
         "projectName": "urele.Service",
         "projectPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj",
         "packagesPath": "C:\\Users\\CASPER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\obj\\",
+        "outputPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,9 +49,21 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Neo4j.Driver": {
+              "target": "Package",
+              "version": "[5.3.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
+            },
+            "jose-jwt": {
+              "target": "Package",
+              "version": "[4.1.0, )"
             }
           },
           "imports": [
