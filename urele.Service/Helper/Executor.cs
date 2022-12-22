@@ -197,17 +197,9 @@ namespace urele.Service.Helper
                 throw new Exception("Hata: ", ex);
             }
         }
-        public async static Task<bool> executeReturnless(string query)
+        public async static Task executeReturnless(string query)
         {
-            try
-            {
-                await (await session.RunAsync(query)).FetchAsync();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            await (await session.RunAsync(query)).FetchAsync();
         }
     }
     public class NodeEntity

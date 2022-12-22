@@ -21,15 +21,10 @@ namespace urele.Service.Controllers
 			}
 			usr.password = SpassEnc.Encrypt(usr.password);
 			string query = $"CREATE (n:User {{username: '{usr.username}', name: '{usr.name}', surname: '{usr.surname}', email: '{usr.email}', password: '{usr.password}'}})";
-			bool res = await Executor.executeReturnless(query);
-			if (res)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest();
-			}
+			await Executor.executeReturnless(query);
+
+			return Ok();
+
 		}
 		[Route("login")]
 		[HttpPost]

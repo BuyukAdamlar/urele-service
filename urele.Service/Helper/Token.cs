@@ -11,7 +11,7 @@ namespace urele.Service.Helper
 
 		public TokenEntity encrypt(User user)
 		{
-			DateTime expire = DateTime.Now.AddHours(8);
+			DateTime expire = DateTime.Now.AddHours(2);
 			var payload = new Dictionary<string, object>
 			{
 				{ "username", user.username },
@@ -36,19 +36,28 @@ namespace urele.Service.Helper
 			{
 				payload.Remove("tokenExpiresOn");
 			}
-			payload.Add("tokenExpiresOn", DateTime.Now.AddDays(1));
+			payload.Add("tokenExpiresOn", DateTime.Now.AddHours(2));
 			return JWT.Encode(payload, secretKey, JwsAlgorithm.HS256);
 		}
 
 		public User decrypt(string token)
 		{
 			var payload = JWT.Decode(token, secretKey, JwsAlgorithm.HS256);
-			return JsonConvert.DeserializeObject<User>(payload);
+			var result = JsonConvert.DeserializeObject<User>(payload);
+			if (result.tokenExpiresOn! > DateTime.Now)
+			{
+				return result;
+			}
+			else
+			{
+				throw new Exception("Token geçerlilik süresi dolmuş!");
+			}
 		}
 		public User decrypt(TokenEntity token)
 		{
-			var payload = JWT.Decode(token.token, secretKey, JwsAlgorithm.HS256);
-			return JsonConvert.DeserializeObject<User>(payload);
+			return decrypt(token.token);
 		}
+
+
 	}
 }

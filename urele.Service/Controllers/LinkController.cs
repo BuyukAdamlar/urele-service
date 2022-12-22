@@ -26,15 +26,8 @@ namespace urele.Service.Controllers
 				var tokenParsed = tk.decrypt(clm.token);
 				query = $"MATCH(u:User) WHERE u.username = '{tokenParsed.username}' WITH u " + query + $"-[:CREATED_BY]->(u)";
 			}
-			var res = await Executor.executeReturnless(query);
-			if (res == true)
-			{
-				return Ok(shortLink);
-			}
-			else
-			{
-				return BadRequest();
-			}
+			await Executor.executeReturnless(query);
+			return Ok(shortLink);
 		}
 		private async Task<string> generateShortLink()
 		{
@@ -55,20 +48,13 @@ namespace urele.Service.Controllers
 
 		//Link oluşturduktan sonra açılacak olan kutucuktan linkin ayarlarını yapmak için kullanılır
 		[HttpPost]
-		public async Task<ActionResult> updateWhileCreating(updateLinkOnCreating uloc)
+		public async Task<ActionResult> updateLink(updateLinkOnCreating uloc)
 		{
 			ZonedDateTime zdt = new ZonedDateTime(uloc.expiresOn);
 			string query = $"MATCH (n:Link) WHERE n.shortLink = '{uloc.shortLink}' SET n.title = '{uloc.title}', n.description = '{uloc.description}', " +
 				$"n.waitTime = {uloc.waitTime}, n.expiresOn = datetime('{zdt}')";
-			bool res = await Executor.executeReturnless(query);
-			if (res)
-			{
-				return Ok();
-			}
-			else
-			{
-				return BadRequest();
-			}
+			await Executor.executeReturnless(query);
+			return Ok();
 		}
 
 
@@ -98,6 +84,25 @@ namespace urele.Service.Controllers
 				links.Add(link);
 			}
 			return Ok(links);
+		}
+	}
+
+	[ApiController]
+	public class OpenLinkController : ControllerBase
+	{
+		[HttpGet("{shortLink}")]
+		public async Task<ActionResult<GoShortLink>> goShortLink(string shortLink)
+		{
+			string query = $"MATCH(l:Link)-[:CREATED_BY]->(u:User) WHERE l.shortLink = '{shortLink}' RETURN l, u.username AS u";
+			var qres = await Executor.executeOneNode(query);
+			var result = new GoShortLink();
+			var linkRes = ((NodeEntity)qres["l"]).Properties;
+			result.title = (string)linkRes["title"];
+			result.description = (string)linkRes["description"];
+			result.creator = (string)qres["u"];
+			result.waitTime = (long)linkRes["waitTime"];
+			result.url = (string)linkRes["url"];
+			return Ok(result);
 		}
 	}
 }
