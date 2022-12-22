@@ -99,6 +99,5 @@ namespace urele.Service.Controllers
 			}
 			return Ok(links);
 		}
-
 	}
 }
