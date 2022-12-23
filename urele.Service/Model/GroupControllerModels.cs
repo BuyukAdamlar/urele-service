@@ -13,4 +13,9 @@
         public string invitingUsername { get; set; }
     }
 
+    public class requestToken
+    {
+        public string token { get; set; }
+    }
+
 }

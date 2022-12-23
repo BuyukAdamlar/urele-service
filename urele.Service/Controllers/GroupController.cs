@@ -12,10 +12,11 @@ namespace urele.Service.Controllers
     {
         Token tk = new Token();
 
-        [HttpGet]
-        public async Task<ActionResult<List<string>>> getGroupNames([FromBody] string token)
+        //kullanıcının üyesi olduğu grupları listelemek için kullanılır
+        [HttpPost]
+        public async Task<ActionResult<List<string>>> getGroupNames(requestToken rt)
         {
-            string user = tk.decrypt(token).username;
+            string user = tk.decrypt(rt.token).username;
             string query = $"MATCH (n:User) WHERE username = '{user}' MATCH (n)-[:MEMBER]->(g:Group) RETURN g.name AS name";
             var qres = (await Executor.execute(query))["name"].Select(x => x.ToString()).ToList();
             return Ok(qres);
@@ -56,10 +57,10 @@ namespace urele.Service.Controllers
         }
 
         //Kullanıcının istek yollamadığı, davet edilmediği ve üyesi olmaayan tüm grupları listeler bu alttaki metot
-        [HttpGet("all")]
-        public async Task<ActionResult<List<string>>> getAllGroups([FromBody] string token)
+        [HttpPost("all")]
+        public async Task<ActionResult<List<string>>> getAllGroups(requestToken rt)
         {
-            string user = tk.decrypt(token).username;
+            string user = tk.decrypt(rt.token).username;
             string query = $"MATCH(u:User) WHERE u.name='{user}' MATCH(g:Group) WHERE NOT (u)-->(g) RETURN g.name AS n";
             var res = (await Executor.execute(query))["n"].Select(e => e.ToString()).ToList();
             return Ok(res);
@@ -118,6 +119,38 @@ namespace urele.Service.Controllers
                 $" DELETE r";
             await Executor.executeReturnless(query);
             return Ok();
+        }
+
+        [HttpPost("members")]
+        public async Task<ActionResult<List<string>>> getGroupMembers(createGroup cg)
+        {
+            string user = tk.decrypt(cg.token).username;
+            string query = $"MATCH(u:User)-[:MEMBER]->(g:Group) WHERE u.username = '{user}' AND g.name = '{cg.groupName}' WITH g " +
+                $" MATCH(u:User)-[:MEMBER]->(g) RETURN u.username AS n";
+            var res = (await Executor.execute(query))["n"].Select(e => e.ToString()).ToList();
+            return Ok(res);
+        }
+
+        //invite yollayan grup isimlerini döndürür
+        [HttpPost("invites")]
+        public async Task<ActionResult<List<string>>> getInvites(requestToken cg)
+        {
+            string user = tk.decrypt(cg.token).username;
+            string query = $"MATCH(u:User)-[:INVITED]->(g:Group) WHERE u.username = '{user}' RETURN g.name AS n";
+            var res = (await Executor.execute(query))["n"].Select(e => e.ToString()).ToList();
+            return Ok(res);
+        }
+
+
+        //request yollayan kullanıcı isimlerini döndürür
+        [HttpPost("requests")]
+        public async Task<ActionResult<List<string>>> getGroupRequests(createGroup cg)
+        {
+            string user = tk.decrypt(cg.token).username;
+            string query = $"MATCH(u:User)-[:MEMBER]->(g:Group) WHERE u.username = '{user}' AND g.name = '{cg.groupName}' WITH g " +
+                $" MATCH(u:User)-[:REQUESTED]->(g) RETURN u.username AS n";
+            var res = (await Executor.execute(query))["n"].Select(e => e.ToString()).ToList();
+            return Ok(res);
         }
     }
 }

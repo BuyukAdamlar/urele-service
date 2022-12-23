@@ -14,4 +14,10 @@
         public string shortLink { get; set; }
     }
 
+    public class checkUsernameForShare
+    {
+        public string username { get; set; }
+        public string token { get; set; }
+    }
+
 }

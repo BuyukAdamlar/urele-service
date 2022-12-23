@@ -12,9 +12,10 @@ namespace urele.Service.Controllers
     {
         Token tk = new Token();
         [HttpPost("check")]
-        public async Task<ActionResult<bool>> CheckUsername([FromBody] string username)
+        public async Task<ActionResult<bool>> CheckUsername(checkUsernameForShare cufs)
         {
-            var result = (long)(await Executor.executeOneNode($"MATCH(n:User) WHERE n.username = '{username}' RETURN COUNT(n) AS c"))["c"];
+            var usr = tk.decrypt(cufs.token);
+            var result = (long)(await Executor.executeOneNode($"MATCH(n:User) WHERE n.username = '{cufs.username}' RETURN COUNT(n) AS c"))["c"];
             if (result == 1)
             {
                 return Ok(true);
