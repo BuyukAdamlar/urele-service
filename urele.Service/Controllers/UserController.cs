@@ -28,6 +28,7 @@ namespace urele.Service.Controllers
             return Ok();
 
         }
+
         [HttpPost("login")]
         public async Task<ActionResult<TokenEntity>> Login(LoginModel lm)
         {
@@ -41,7 +42,8 @@ namespace urele.Service.Controllers
                 var getRes = await Executor.executeOneNode(getUserQuery);
                 if (getRes["act"] != null)
                 {
-                    return Unauthorized("Lütfen mailinize gönderilen link ile hesabınızı aktifleştiriniz!");
+
+                    return Conflict("Lütfen mailinize gönderilen link ile hesabınızı aktifleştiriniz!");
                 }
                 User usr = new User
                 {
@@ -56,9 +58,21 @@ namespace urele.Service.Controllers
             }
             else
             {
-                throw new Exception("Giriş bilgileri hatalı...");
+                return Unauthorized("Giriş bilgileri hatalı...");
             }
         }
+
+        [HttpPost("login/token")]
+        public async Task<ActionResult<TokenEntity>> Login(requestToken rt)
+        {
+            var tkn = tk.decrypt(rt.token);
+            return await Login(new LoginModel
+            {
+                id = tkn.username,
+                password = tkn.password
+            });
+        }
+
 
         [HttpPost("edit")]
         public async Task<ActionResult> Edit(EditUser usr)
