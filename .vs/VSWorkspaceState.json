@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\urele.Service",
+    "\\urele.Service.Test",
+    "\\urele.Service\\Controllers"
   ],
+  "SelectedNode": "\\urele.Service.sln",
   "PreviewInSolutionExplorer": false
 }
