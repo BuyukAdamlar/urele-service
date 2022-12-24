@@ -175,8 +175,31 @@ namespace urele.Service.Controllers
                 slu.title = (string)qres["t"][res.Count];
                 slu.description = (string)qres["d"][res.Count];
                 slu.username = (string)qres["u"][res.Count];
-                slu.expiresOn = Executor.NeoDateTimeDecrypt(qres["e"][res.Count]);
+                slu.expiresOn = (DateTime)(qres["e"][res.Count]);
                 res.Add(slu);
+            }
+            return Ok(res);
+        }
+
+        [HttpPost("getGroupShared")]
+        public async Task<ActionResult<List<SharedLinksGroup>>> getGroupSharedLinks(requestToken rt)
+        {
+            var user = tk.decrypt(rt.token);
+            string query = $"MATCH(u:User)-[:MEMBER]->(g:Group) WHERE u.username = '{user.username}' WITH g " +
+                $"MATCH (l:Link)-[:SHARED]->(g) WITH g, l " +
+                $"MATCH (l)-[:CREATED_BY]->(u:User) RETURN l.shortLink AS sl, l.title AS t, l.description AS d, u.username AS u, l.expiresOn AS ex, g.name AS gn";
+            var qres = await Executor.execute(query);
+            List<SharedLinksGroup> res = new List<SharedLinksGroup>();
+            foreach (var obj in qres["sl"])
+            {
+                SharedLinksGroup slg = new SharedLinksGroup();
+                slg.shortLink = (string)obj;
+                slg.title = (string)qres["t"][res.Count];
+                slg.description = (string)qres["d"][res.Count];
+                slg.username = (string)qres["u"][res.Count];
+                slg.expiresOn = (DateTime)(qres["ex"][res.Count]);
+                slg.groupname = (string)qres["gn"][res.Count];
+                res.Add(slg);
             }
             return Ok(res);
         }

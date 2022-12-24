@@ -40,6 +40,15 @@
 		public DateTime expiresOn { get; set; }
 
 	}
+	public class SharedLinksGroup
+	{
+		public string shortLink { get; set; }
+		public string username { get; set; }
+		public string groupname { get; set; }
+		public string title { get; set; }
+		public string description { get; set; }
+		public DateTime expiresOn { get; set; }
+	}
 
 	public class GenerateOtherModel
 	{

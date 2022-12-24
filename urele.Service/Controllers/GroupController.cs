@@ -17,7 +17,7 @@ namespace urele.Service.Controllers
         public async Task<ActionResult<List<string>>> getGroupNames(requestToken rt)
         {
             string user = tk.decrypt(rt.token).username;
-            string query = $"MATCH (n:User) WHERE username = '{user}' MATCH (n)-[:MEMBER]->(g:Group) RETURN g.name AS name";
+            string query = $"MATCH (n:User) WHERE n.username = '{user}' MATCH (n)-[:MEMBER]->(g:Group) RETURN g.name AS name";
             var qres = (await Executor.execute(query))["name"].Select(x => x.ToString()).ToList();
             return Ok(qres);
         }
@@ -61,7 +61,7 @@ namespace urele.Service.Controllers
         public async Task<ActionResult<List<string>>> getAllGroups(requestToken rt)
         {
             string user = tk.decrypt(rt.token).username;
-            string query = $"MATCH(u:User) WHERE u.name='{user}' MATCH(g:Group) WHERE NOT (u)-->(g) RETURN g.name AS n";
+            string query = $"MATCH(u:User) WHERE u.username='{user}' MATCH(g:Group) WHERE NOT (u)-->(g) RETURN g.name AS n";
             var res = (await Executor.execute(query))["n"].Select(e => e.ToString()).ToList();
             return Ok(res);
         }
