@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj": {}
+    "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj": {
+    "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj",
+        "projectUniqueName": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj",
         "projectName": "urele.Service.Test",
-        "projectPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj",
+        "projectPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj",
         "packagesPath": "C:\\Users\\CASPER\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\obj\\",
         "projectStyle": "PackageReference",
@@ -33,8 +33,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj": {
-                "projectPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj"
+              "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj": {
+                "projectPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj"
               }
             }
           }
@@ -68,14 +68,14 @@
         }
       }
     },
-    "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj": {
+    "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj",
+        "projectUniqueName": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj",
         "projectName": "urele.Service",
-        "projectPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj",
+        "projectPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\urele.Service.csproj",
         "packagesPath": "C:\\Users\\CASPER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service\\obj\\",
+        "outputPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

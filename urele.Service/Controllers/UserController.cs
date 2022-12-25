@@ -49,7 +49,7 @@ namespace urele.Service.Controllers
                 {
                     username = (string)getRes["un"],
                     email = (string)getRes["e"],
-                    password = password,
+                    password = lm.password,
                     name = (string)getRes["n"],
                     surname = (string)getRes["s"]
                 };
