@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\urele.Service"
+    "\\urele.Service",
+    "\\urele.Service\\Controllers"
   ],
-  "SelectedNode": "\\urele.Service\\Program.cs",
+  "SelectedNode": "\\urele.Service\\Controllers\\UserController.cs",
   "PreviewInSolutionExplorer": false
 }

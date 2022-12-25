@@ -11,7 +11,7 @@
         "projectName": "urele.Service.Test",
         "projectPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\urele.Service.Test.csproj",
         "packagesPath": "C:\\Users\\CASPER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\CASPER\\Source\\Repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\obj\\",
+        "outputPath": "C:\\Users\\CASPER\\source\\repos\\BuyukAdamlar\\urele-service\\urele.Service.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

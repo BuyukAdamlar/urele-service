@@ -23,7 +23,7 @@ namespace urele.Service.Controllers
             usr.password = SpassEnc.Encrypt(usr.password);
             string query = $"CREATE (n:User {{username: '{usr.username}', name: '{usr.name}', surname: '{usr.surname}', email: '{usr.email}', password: '{usr.password}', activation: '{activation}'}})";
             await Executor.executeReturnless(query);
-            string mailBody = SendMail.mailText.Replace("azzxsdara5612661", URL.baseUrl + "/user/activate/" + activation).Replace("http://urele.azurewebsites.net", URL.mainUrl);
+            string mailBody = SendMail.mailText.Replace("azzxsdara5612661", URL.baseUrl + "/User/activate/" + activation).Replace("http://urele.azurewebsites.net", URL.mainUrl);
             await SendMail.sendMail(usr.email, "URELE HESAP AKTİVASYONU", mailBody);
             return Ok();
 
