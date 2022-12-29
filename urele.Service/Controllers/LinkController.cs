@@ -211,15 +211,30 @@ namespace urele.Service.Controllers
         [HttpGet("{shortLink}")]
         public async Task<ActionResult<GoShortLink>> goShortLink(string shortLink)
         {
+            bool second = false;
             string query = $"MATCH(l:Link)-[:CREATED_BY]->(u:User) WHERE l.shortLink = '{shortLink}' RETURN l, u.username AS u";
             var qres = await Executor.executeOneNode(query);
+            if (qres.Count == 0)
+            {
+                second = true;
+                query = $"MATCH(l:Link) WHERE l.shortLink = '{shortLink}' RETURN l";
+                qres = await Executor.executeOneNode(query);
+            }
             var result = new GoShortLink();
             var linkRes = ((NodeEntity)qres["l"]).Properties;
             result.title = (string)linkRes["title"];
             result.description = (string)linkRes["description"];
-            result.creator = (string)qres["u"];
+            if (!second)
+            {
+                result.creator = (string)qres["u"];
+            }
+            else
+            {
+                result.creator = "Anonim";
+            }
             result.waitTime = (long)linkRes["waitTime"];
             result.url = (string)linkRes["url"];
+            result.expiresOn = Executor.NeoDateTimeDecrypt(linkRes["expiresOn"]);
             return Ok(result);
         }
     }

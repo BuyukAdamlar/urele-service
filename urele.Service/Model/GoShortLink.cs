@@ -7,6 +7,7 @@
         public string title { get; set; } //Link başlığı
         public string description { get; set; } //Link mesajı
         public string creator { get; set; } //Oluşturan kişi
+        public DateTime expiresOn { get; set; } //Son geçerlilik tarihi
 
     }
 }
