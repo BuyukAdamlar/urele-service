@@ -203,7 +203,19 @@ namespace urele.Service.Controllers
             }
             return Ok(res);
         }
+
+
+        [HttpPost("click")]
+        public async Task<ActionResult> addClick(requestToken shortLink)
+        {
+            string query = $"MATCH (n:Link) WHERE n.shortLink = '{shortLink.token}' SET n.clickCount = n.clickCount + 1";
+            await Executor.executeReturnless(query);
+            return Ok();
+        }
     }
+
+
+
 
     [ApiController]
     public class OpenLinkController : ControllerBase
